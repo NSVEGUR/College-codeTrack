@@ -1,0 +1,59 @@
+#include <iostream>
+using namespace std;
+
+class ReportCard
+{
+private:
+  string name;
+  int rollNumber;
+  float programming, webDevelopment, english, science, mathematics;
+
+public:
+  ReportCard()
+  {
+    this->name = "\0";
+    this->rollNumber = 0;
+    this->programming = 0;
+    this->webDevelopment = 0;
+    this->english = 0;
+    this->science = 0;
+    this->mathematics = 0;
+  }
+  ReportCard(string name, int rollNumber)
+  {
+    this->name = name;
+    this->rollNumber = rollNumber;
+    this->programming = 0;
+    this->webDevelopment = 0;
+    this->english = 0;
+    this->science = 0;
+    this->mathematics = 0;
+  }
+  void create(string name, int rollNumber, float programming, float webDevelopment, float english, float science, float mathematics);
+  void display();
+};
+
+void ReportCard::create(string name, int rollNumber, float programming, float webDevelopment, float english, float science, float mathematics)
+{
+  this->name = name;
+  this->rollNumber = rollNumber;
+  this->programming = programming;
+  this->webDevelopment = webDevelopment;
+  this->english = english;
+  this->science = science;
+  this->mathematics = mathematics;
+}
+
+void ReportCard::display()
+{
+  cout << "-----------------------------------------------------------------------" << endl;
+  cout << "Name : " << this->name << endl;
+  cout << "Roll No. : " << this->rollNumber << endl;
+  cout << "\033[1;34m-----Marks secured by " << this->name << " -----\033[0m" << endl;
+  cout << "Programming: " << this->programming << endl;
+  cout << "Web-Development: " << this->webDevelopment << endl;
+  cout << "English: " << this->english << endl;
+  cout << "Science: " << this->science << endl;
+  cout << "Mathematics: " << this->mathematics << endl;
+  cout << "-----------------------------------------------------------------------" << endl;
+}
