@@ -4,11 +4,14 @@
 //Name: V Nagasai
 
 int main(){
-   int a = 3;
+   int a = 30;
    int b = a + 1.4;
    printf("Hello World\n");
    /*scanf("%d", &b);
    printf("%d\n", b);
    */
+   a++;
+   ++b;
+   int c = a <= b;
    return 0;
 }

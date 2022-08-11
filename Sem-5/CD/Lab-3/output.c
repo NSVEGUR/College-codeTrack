@@ -1,7 +1,10 @@
 
 int main(){
-int a = 3;
+int a = 30;
 int b = a + 1.4;
 printf("Hello World\n");
- return 0;
+ a++;
+++b;
+int c = a <= b;
+return 0;
 }
