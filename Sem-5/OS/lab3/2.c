@@ -25,14 +25,14 @@ int main()
         temp[i] = process[i].burstTime;
     }
 
-    process[9].priority = 10000;
+    process[9].priority = -10000;
 
     for (t = 0; count != n; t++)
     {
         short_p = 9;
         for (int i = 0; i < n; i++)
         {
-            if (process[short_p].priority > process[i].priority && process[i].arrivalTime <= t && process[i].burstTime > 0)
+            if (process[short_p].priority < process[i].priority && process[i].arrivalTime <= t && process[i].burstTime > 0)
             {
                 short_p = i;
             }

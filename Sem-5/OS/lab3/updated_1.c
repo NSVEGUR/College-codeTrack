@@ -1,3 +1,5 @@
+// Shortest job first CPU scheduling algorithm
+
 #include<stdio.h>
 #include<stdlib.h>
 
