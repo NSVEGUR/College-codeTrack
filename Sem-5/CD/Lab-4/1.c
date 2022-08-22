@@ -2,103 +2,116 @@
 //ROLL NO:-CS20B1016
 //Q:-GIVEN A CFG, DO RECURSIVE DESCENT PARSING 
 
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-char inputStr[1000];
-int i=0;
-void fs();
-void fa();
-void fb();
+void fA();
+void fB();
+void fS();
 
-void fb(){
-    switch(inputStr[i]){
+#define SIZE 10000
+char arr_str[SIZE], token;
+int i = 0;
+
+void get_token()
+{
+    i++;
+    token = arr_str[i];
+}
+
+void error(){
+    printf("\nString is NOT ACCEPTED\n");
+    exit(0);    
+}
+
+void fA()
+{
+    switch (token)
+    {
+    case 'b':
+        get_token();
+
+        if(token == 'a')
+            get_token();
+
+        else
+            error();
+
+        break;
+
+    case 'a':
+        fS();
+        fB();
+        break;
+    case 'c':
+        fS();
+        fB();
+        break;
+    
+    default:
+        error();
+        break;
+    }
+}
+
+void fB()
+{
+    switch (token)
+    {
         case 'b':
-        {
-            i++;
-            fa();
+            get_token();
+            fA();
             break;
-        }
+        
         case 'a':
-        {
-            fs();
+            fS();
             break;
-        }
+        
         case 'c':
-        {
-            fs();
+            fS();
             break;
-        }
+        
         default:
+            error();
             break;
     }
 }
 
-void fa(){
-    switch (inputStr[i]){
-        case 'b':
-        {
-            i++;
-            if(inputStr[i]=='a'){
-                i++;
-            }
-            else{
-                printf("\nRejected\n");
-            }
-            break;
-        }
-        case 'a':
-        {
-            fs();
-            fb();
-            break;
-        }
-        case 'c':
-        {
-            fs();
-            fb();
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-void fs(){
-    switch (inputStr[i])
+void fS()
+{
+    switch (token)
     {
     case 'a':
-    {
-        i++;
-        fa();
-        fs();
+        get_token();
+        fA();
+        fS();
         break;
-    }
+    
     case 'c':
-    {
-        i++;
+        get_token();
         break;
-    }
+
     default:
         break;
     }
 }
 
-int main(){
-    int n;
-    printf("Enter the size of the input string: ");
-    scanf("%d",&n);
-    printf("Enter the String: ");
-    for(int j=0;j<n;j++){
-        scanf(" %c",&inputStr[j]);
-    }
+int main()
+{
+    printf("Enter the string : ");
 
-    fs();
+    fgets(arr_str, SIZE, stdin);
+    token = arr_str[0];
 
-    if(inputStr[i]=='$'){
-        printf("Accepted.\n");
-    }
-    else{
-        printf("Rejected.\n");
-    }
+    fS();
 
+    if(token == '$')
+        printf("\nString is ACCEPTED\n");
+    
+    else   
+        error();
+
+
+    return 0;
 }
