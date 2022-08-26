@@ -4,7 +4,7 @@
 /*
 2)  Write a menu driven program to implement VRC with following options:
 3. Send message:You need to take <Data bits> from user. Then, perform VRC and display the
-output as <Data bits>+<LRC code bits>
+output as <Data bits>+<VRC code bits>
 4. Receve message: You need to take input as <Data bits>+<VRC code bits> from user. Then,
 perform VRC and display <Data bits> and detection message (Accept/Reject)
 */
