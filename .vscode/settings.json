@@ -3,5 +3,15 @@
     "*.ejs": "html",
     "string.h": "c",
     "types.h": "c"
-  }
+  },
+  "cSpell.words": [
+    "Aadhar",
+    "Bhanu",
+    "Hiredinni",
+    "Kandigai",
+    "Melakottaiyur",
+    "Nagar",
+    "Nagasai",
+    "Raichur"
+  ]
 }
