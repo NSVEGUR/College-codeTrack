@@ -2,7 +2,8 @@
   "files.associations": {
     "*.ejs": "html",
     "string.h": "c",
-    "types.h": "c"
+    "types.h": "c",
+    "socket.h": "c"
   },
   "cSpell.words": [
     "Aadhar",
