@@ -3,7 +3,10 @@
     "*.ejs": "html",
     "string.h": "c",
     "types.h": "c",
-    "socket.h": "c"
+    "socket.h": "c",
+    "__locale": "c",
+    "locale": "c",
+    "stdio.h": "c"
   },
   "cSpell.words": [
     "Aadhar",
