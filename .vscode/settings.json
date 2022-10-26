@@ -6,7 +6,13 @@
     "socket.h": "c",
     "__locale": "c",
     "locale": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "chrono": "c",
+    "__availability": "c",
+    "__config": "c",
+    "ctime": "c",
+    "algorithm": "c",
+    "in.h": "c"
   },
   "cSpell.words": [
     "Aadhar",
