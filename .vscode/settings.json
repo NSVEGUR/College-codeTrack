@@ -12,7 +12,9 @@
     "__config": "c",
     "ctime": "c",
     "algorithm": "c",
-    "in.h": "c"
+    "in.h": "c",
+    "pthread.h": "c",
+    "cstdlib": "c"
   },
   "cSpell.words": [
     "Aadhar",
