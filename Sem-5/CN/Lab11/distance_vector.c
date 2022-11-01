@@ -4,6 +4,7 @@
 
 #include<stdio.h>
 #define MAX_SIZE 31
+#define INF 9999
 
 typedef struct
 {
@@ -19,7 +20,13 @@ void inputAdjacencyMatrix(int n, int adj_matrix[][n]){
 			for(int j=0;j<n;j++)
 			{
 					scanf("%d",&adj_matrix[i][j]);
-					adj_matrix[i][i]=0;
+					if(i != j){
+						if(adj_matrix[i][j] == 0){
+							adj_matrix[i][j] = INF;
+						}
+					}else{
+						adj_matrix[i][i]=0;
+					}
 					routing_table[i].distance[j]=adj_matrix[i][j];
 					routing_table[i].fromNode[j]=j;
 			}
