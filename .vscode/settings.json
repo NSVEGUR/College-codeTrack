@@ -27,7 +27,8 @@
     "string_view": "c",
     "unordered_map": "c",
     "vector": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "stdbool.h": "c"
   },
   "cSpell.words": [
     "Aadhar",
