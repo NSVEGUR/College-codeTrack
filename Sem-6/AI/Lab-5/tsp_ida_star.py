@@ -62,9 +62,9 @@ class Graph:
 		
 
 	def ida_star_search(self, start: tuple):
-		cutoff_bound = {}
 		cutoff_bound = self.h[start[0]]
-		explored = []
+		explored = [] 
+		best_bound = None
 		while True:
 			stack = []
 			stack.append(start)
@@ -73,6 +73,8 @@ class Graph:
 				backtrack = False
 				path, cost = stack.pop()
 				f = cost + self.h[path[-1]]
+				if best_bound != None and f > best_bound:
+					continue
 				if path not in explored and f > cutoff_bound:
 					backtrack = True
 					explored.append(path)
@@ -83,6 +85,8 @@ class Graph:
 					goal_cost = cost + self.E[self.__index__(path[-1])][self.__index__(start[0])]
 					print(f"Path: {goal_path}, Cost: {goal_cost}")
 					paths.append((goal_path, goal_cost))
+					if best_bound == None or best_bound > cost + self.h[path[-1]]:
+						best_bound = cost + self.h[path[-1]]
 				for (neighbor_index, neighbor_cost) in enumerate(self.E[self.__index__(path[-1])]):
 					neighbor = self.V[neighbor_index]
 					if neighbor_cost and neighbor not in path:

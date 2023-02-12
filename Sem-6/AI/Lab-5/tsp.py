@@ -134,9 +134,9 @@ class Graph:
 	#IDA* Algorithm
 	def ida_star_search(self, s:tuple):
 		print("\n----- TSP using IDA* algorithm (MST as Heuristic) -----\n")
-		cutoff_bound = {}
 		cutoff_bound = self.h[s[0]]
-		explored = []
+		explored = [] 
+		best_bound = None
 		while True:
 			stack = []
 			stack.append(s)
@@ -145,6 +145,8 @@ class Graph:
 				backtrack = False
 				path, cost = stack.pop()
 				f = cost + self.h[path[-1]]
+				if best_bound != None and f > best_bound:
+					continue
 				if path not in explored and f > cutoff_bound:
 					backtrack = True
 					explored.append(path)
@@ -155,6 +157,8 @@ class Graph:
 					goal_cost = cost + self.E[self.__index__(path[-1])][self.__index__(s[0])]
 					print(f"Path: {goal_path}, Cost: {goal_cost}")
 					paths.append((goal_path, goal_cost))
+					if best_bound == None or best_bound > cost + self.h[path[-1]]:
+						best_bound = cost + self.h[path[-1]]
 				for (neighbor_index, neighbor_cost) in enumerate(self.E[self.__index__(path[-1])]):
 					neighbor = self.V[neighbor_index]
 					if neighbor_cost and neighbor not in path:
@@ -176,9 +180,10 @@ class Graph:
 
 			if paths:
 				minimum = min(paths, key = lambda x: x[1])
-				print(f"\nMinimum cost: {minimum[1]} and its Path is {minimum[0]}\n")
+				print(f"\nMinimum Cost: {minimum[1]} and its Path: {minimum[0]}\n")
 			if not stack:
 				break
+
 
 
 
