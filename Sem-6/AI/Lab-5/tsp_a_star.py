@@ -17,22 +17,15 @@ class MST:
 	
 	def cost(self):
 		key = [sys.maxsize]*self.n
-		parent = [None]*self.n
 		mstSet = [False]*self.n
 		key[0] = 0
-		parent[0] = -1
-
 		for _ in range(self.n):
 			u = self.__min_key__(key, mstSet)
 			mstSet[u] = True
 			for v in range(self.n):
 				if self.E[u][v] > 0 and self.E[u][v] < key[v] and mstSet[v] == False:
 					key[v] = self.E[u][v]
-					parent[v] = u
-		cost = 0
-		for i in range(1, self.n):
-			cost += self.E[i][parent[i]]
-		return cost
+		return sum(key)
 
 class Graph:
 	def __init__(self, V: list, E:list):
@@ -43,16 +36,15 @@ class Graph:
 		for edge in E:
 			(X,Y, cost) = edge
 			if X != Y:
-				x, y = self.V.index(X), self.V.index(Y)
+				x, y = self.__index__(X), self.__index__(Y)
 				self.E[x][y] = cost
 				self.E[y][x] = cost
-		self.calculate_heuristic()
+		self.__calculate_heuristic__()
 
-	#Utility function which returns index of given vertex
-	def index(self, vertex):
+	def __index__(self, vertex: str) -> int:
 		return self.V.index(vertex)
 	
-	def calculate_heuristic(self):
+	def __calculate_heuristic__(self):
 		for index, m in enumerate(self.V):
 			V = [v for v in self.V if v != m]
 			E = []
@@ -66,7 +58,6 @@ class Graph:
 			self.h[m] = mst.cost()
 
 	def a_star_search(self, s: str):
-		print("----- TSP using A* Algorithm -----")
 		open, closed = set([s]), set()
 		g = {}
 		g[s] = 0
@@ -83,34 +74,28 @@ class Graph:
 			if parent_path is None:
 				path_len -= 1
 				continue
-			else:
-				if path_len == self.n:
-					path = parent_path + s
-					cost = g[parent_path] + self.E[self.index(s)][self.index(parent_path[-1])]
-					print(f"Path: {path}, cost: {cost}")
-					path_costs.append((path, cost))
-				else:
-					path_len += 1
-			for (index, cost) in enumerate(self.E[self.index(parent_path[-1])]):
-				current_node = self.V[index]
-				if current_node in parent_path:
+			if path_len == self.n:
+				path = parent_path + s
+				cost = g[parent_path] + self.E[self.__index__(s)][self.__index__(parent_path[-1])]
+				print(f"Path: {path}, Cost: {cost}")
+				path_costs.append((path, cost))
+				path_len -= 1
+				closed.add(parent_path)
+				open.remove(parent_path)
+				continue
+			path_len += 1
+			closed.add(parent_path)
+			for (index, cost) in enumerate(self.E[self.__index__(parent_path[-1])]):
+				chosen_path = parent_path + self.V[index]
+				if self.V[index] in parent_path:
 					continue
-				chosen_path = parent_path + current_node
-				# print(f"Chosen path: {chosen_path}")
-				if chosen_path not in open and chosen_path not in closed and cost > 0:
+				if self.V[index] not in parent_path and (chosen_path not in open or chosen_path not in closed):
 					open.add(chosen_path)
 					g[chosen_path] = g[parent_path] + cost
-					# print("Not in closed and open")
-				else:
+				elif chosen_path in open:
 					if g[chosen_path] > g[parent_path] + cost:
 						g[chosen_path] = g[parent_path] + cost
-						# print("Updated g due to shortest path")
-						if chosen_path in closed:
-							closed.remove(chosen_path)
-							open.add(chosen_path)
-							# print("Marked as not closed cause there is new edge")
 			open.remove(parent_path)
-			closed.add(parent_path)
 		minimum = min(path_costs, key=lambda x: x[1])
 		print(f"Minimum cost: {minimum[1]} and Path is {minimum[0]}")
 
