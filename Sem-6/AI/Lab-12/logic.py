@@ -1,14 +1,11 @@
 import pytholog as pl
 
-new_knowledge_base = pl.KnowledgeBase("ai")
+new_kb=pl.knowledge_base("facts")
+new_kb(["likes(shyam,mango)",
+        "likes(bill,cindy)",
+        "girl(seema)",
+        "red(rose)",
+        "owns(john,gold)",
+        ])
 
-new_knowledge_base([
-    "likes(shyam, mango)",
-    "girl(seema)",
-    "likes(bill, cindy)",
-    "red(rose)",
-    "owns(john, gold)",
-    "likes(ram, mango)"
-])
-
-print(new_knowledge_base.query(pl.Expr("likes(ram, What)")))
+print(new_kb.query(pl.Expr("likes(bill,russian)")))
